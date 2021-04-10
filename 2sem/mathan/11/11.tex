@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\date{}
+\begin{document}
+\title{Лекция 11. Представление функций степенными рядами.}
+\maketitle
+
+Рассмотрим достаточное условие представления функции степенным рядом.
+
+\textbf{Лемма.} Пусть функция $f$ в некоторой окрестности $B_{\delta}(x_0)$ имеет производную любого порядка и $\exists C>0 \: \forall n \in \mathbb{N} \forall x \in B_{\delta}(x_0) \: \left(|f^{(n)}(x)\leq C|\right)$. Тогда для всех $x \in B_{\delta}(x_0)$ выполнено
+$$f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$
+$\blacktriangle$ Рассмотрим $n$-ый остатой в формуле Тейлора: $$r_{N}(x)=f(x) - \sum_{n=0}^{N}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$$
+По формуле Тейлора с остаточным членом в форме Лагранжа
+$$r_{N}(x)=\frac{f^{(N+1)}(c)}{(N+1)!}(x-x_0)^{N+1}$$ для некоторого $c$, лежащей между $x$ и $x_0$, и, значит,
+$$|r_N(x)|\leq\frac{C}{(N+1)!}\delta^{N+1}\to0$$
+Следовательно, $f$ является суммой своего ряда Тейлора в $B_{\delta}(x_0)$.\:$\blacksquare$
+
+\textbf{Следствие.} Ряды Маклорена функций $e^x, \sin x, \cos x, \sh x \ch x$ сходятся к этим функциям для $\forall x \in \mathbb{R}$.
+\begin{align*}
+e^{x}=\sum_{n=0}^{\infty}\frac{x^n}{n!}, \quad \sin x&= \sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}, & \cos x&= \sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n}}{(2n)!},\\
+                                               \sh  x&= \sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!},         &  \ch x&= \sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}
+\end{align*}
+$\blacktriangle$
+Указанные функции бесконечно дифференцируемы на $\mathbb{R}$:
+\begin{align*}
+(e^x)^{(n)}=e^x, \quad (\sin x)^{(n)}&=\sin (x+\frac{\pi}{2}n),      & (\cos x)^{(n)}&=\cos (x + \frac{pi}{2}n),\\
+                        (\sh x)^{(n)}&=\frac{e^x-(-1)^{n}e^{-x}}{2}, & (\ch x) ^{(n)}&=\frac{e^x+(-1)^n e^x}{2}
+\end{align*}
+Пусть $\delta > 0$, тогда при $|x|<\delta$ имеем
+\begin{align*}
+|(e^x)^{(n)}|\leq e^\delta, \quad (\sin x)^{(n)} &\leq 1,        &(\cos x)^{(n)}   &\leq 1\\
+                                   (\sh x)^{(n)} &\leq e^\delta, &(\ch x)^{(n)}    &\leq e^\delta
+\end{align*}
+По лемме ряды Маклорена этих функций сходятся к самим функциям на интервале $(-\delta, \delta)$. Т.к. $\delta>0$ - любое, то эти ряды сходятся на $\mathbb{R}$.\:$\blacksquare$
+
+\textbf{Теорема 5. Биномиальный ряд.}
+Пусть $\alpha \notin \mathbb{N}$ и
+$$C_{\alpha}^n=\frac{\alpha\cdot(\alpha - 1)\cdot\ldots\cdot(\alpha - n + 1)}{n!}, \:  C_{\alpha}^0=1.$$
+Тогда $$(1+x)^{\alpha}=\sum_{n=0}^\infty C_{\alpha}^{n}x^n, |x|<1$$
+$\blacktriangle$ Положим $f(x)=(1+x)^\alpha$, тогда$$f^{(n)}(x)=\alpha\cdot(\alpha-1)\cdot\ldots\cdot(\alpha-n+1)\cdot(a+x)^{\alpha-n}$$и, значит,$$\frac{f^{(n)}(0)}{n!}=C_{\alpha}^{n}, \: n =0, 1, 2, \ldots$$Т.к. при $x\neq0$ $$\lim_{n\to\infty}\frac{|C_{\alpha}^{n+1}x^{n+1}|}{|C_{\alpha}^{n}x^n|} = \lim_{n \to \infty}\frac{|\alpha-n|}{n+1}|x|=|x|$$По признаку Даламбера ряд абсолютно сходится при $|x|<1$ и абсолютно расходится при $|x|>1$. Следовательно, радиус сходимости биномиального ряда равен 1.
+
+Определим функцию $$g(x)=\sum_{n=0}^{\infty}C_{\alpha}^{n}x^n, |x|<1$$
+Покажем, что $f=g$ на $(-1, 1)$, т.е. $$\forall x\in(-1, 1) \quad (1+x)^{-\alpha}g(x)=1$$
+Найдём производную функции, стоящей в левой части последнего равенства:
+\begin{eqnarray*}
+\left((1+x)^{-\alpha}g(x)\right)^{\prime}=-\alpha(1+x)^{-\alpha-1}\sum_{n=0}^{\infty}C_{\alpha}^{n}x^n+(1+x)^{-\alpha}\sum_{n=0}^{\infty}n C_{\alpha}^{n}x^{n-1}=\\=(1+x)^{-\alpha-1}\left[-\alpha\sum_{n=0}^{\infty}C_{\alpha}^{n}x^n+\sum_{n=0}^{\infty}n C_{\alpha}^n x^n+\sum_{n=1}^{\infty}n C_{\alpha}^{n}x^{n-1}\right]
+\end{eqnarray*}
+В последнем слагаемом сделаем замену индекса суммирования, тогда после приведения подобных слагаемых имееем:
+$$\left((1+x)^{-\alpha-1}g(x)\right)^{\prime}=(1+x)^{-\alpha-1}\sum_{n=0}^{\infty}\left[(n+1)C_{\alpha}^{n+1}-(\alpha-n)C_{\alpha}^{n}\right]x^n=0$$
+Следовательно, функция $(1+x)^{-\alpha}g(x)$ постоянна на $(-1, 1)$. Подстановка $x=0$ дает, что $(1+x)^{-\alpha}g(x)=1$ на $(-1, 1)$.\:$\blacksquare$
+
+\textbf{Замечание.} При $\alpha>0$ ряд $\sum_{n=0}^{\infty}C_{\alpha}^{n}x^n$ сходится равномерно на $[-1, 1]$.
+
+$\blacktriangle$ Положим $a_n=|C_{\alpha}^n|$. Покажем, что ряд $\sum_{n=0}^{\infty}a_n$ сходится. Т.к. $\frac{a_{n+1}}{a_{n}}=\frac{n-\alpha}{n+1}$ при $n>\alpha$.
+
+
+\end{document}
+

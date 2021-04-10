@@ -1,0 +1,129 @@
+\documentclass[a4paper, 16pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[left=15mm, top=10mm, right=15mm, bottom=20mm]{geometry}
+
+\date{}
+\begin{document}
+\title{Лекция 9. Степенные ряды.}
+\maketitle
+
+Пусть $0 < \alpha \leqslant 1$. Покажем, что ряд
+\begin{align}
+    \sum\limits_{n=1}^{\infty}\frac{\sin nx}{n^\alpha}
+\end{align}
+сходится неравномерно на $E=(0, 2\pi)$.
+
+$\blacktriangle$
+Рассмотрим последовательность $\left\{x_n=\frac{1}{2n}\right\}$. Заметим, что $\frac{1}{2} < kx_n \leqslant 1$, тогда
+$$
+\left|\sum\limits_{k=n+1}^{2n}\frac{\sin kx_n}{k^\alpha}\right|=\sum\limits_{k=n+1}^{2n}\frac{\sin kx_n}{k^\alpha} \geqslant \frac{n\sin \frac{1}{2}}{(2n)^\alpha} \geqslant \frac{1}{2}\sin \frac{1}{2} > 0
+$$
+По критерию Коши ряд (1) не сходится равномерно.\:$\blacksquare$
+
+\textbf{Теорема 8 (признак Дини).} Пусть $f_n, f$ непрерывны на $[a, b]$, $f_n \to f$ на $[a, b]$ и $\left\{|f_n(x) - f(x)|\right\}$ нестрого убывает $\forall x \in [a, b]$. Тогда $f_n\rightrightarrows f$ на $[a, b]$.
+
+$\blacktriangle$
+Достаточно доказать, что $g_n:=|f_n-f|\rightrightarrows0$ на $[a, b]$. Предположим противное. Тогда
+$$
+\exists\varepsilon > 0\; \forall N \in \mathbb{N}\;\forall x \geqslant N \;\forall x \in [a, b]\;\left(\left|f_n(x)-f(x)\right|\geqslant \varepsilon\right)
+$$
+или же
+$$
+\exists\varepsilon>0\;\exists\left\{n_k\right\},\;n_1<n_2<\ldots\;\exists\left\{x_k\right\} \subseteq [a, b]\;\left(g_{n_k}(x_k)\geqslant\varepsilon\right)
+$$
+По теореме Больцано-Вейерштрасса $\exists\left\{x_{k_j}\right\}, x_{k_j} \to x \in [a, b]$. В силу монотонности
+$$\forall n \in \mathbb{N}\;\exists j_0 \in \mathbb{N}\;\forall j \geqslant j_0\;\left(g_n(x_{k_j})\geqslant g_{n_{k_j}}(x_{k_j})\;\Rightarrow\;g_n(x_{k_j})\geqslant\varepsilon\right)$$
+Перейдя к пределу при $j \to \infty$, получим $g_n(x) \geqslant \varepsilon$, что противоречит $g_n(x)\to 0$.\;\blacksquare
+
+\textbf{Следствие.} Пусть $\sum\limits_{n=1}^{\infty}f_n$ поточечно сходится к функции $S$ на $[a, b]$, все $f_n, f$ непрерывны на $[a, b]$ и $f_n \geqslant 0$ на $[a, b]$. Тогда ряд $\sum\limits_{n=1}^{\infty}f_n$ сходится равномерно на $[a, b]$ (достаточно применить признак Дини для последовательности частичных сумм).
+
+\textbf{Пример (Ван-дер-Варден).} Существует непрерывная функция $f:\mathbb{R}\to\mathbb{R}$, не дифференцируемая ни в одной точке.
+
+$\blacktriangle$ Рассмотрим $\varphi:\mathbb{R}\to\mathbb{R},\;\varphi(x)=|x|$ на $[-1, 1]$ и $\varphi(x\pm 2)=\varphi(x)$. Заметим, что если $(x, y)\cap \mathbb{Z}=\varnothing$, то сужение $\varphi|_{[x, y]}$ - кусочно-линейная функция с угловым коэффициентом $\pm 1$ и, значит,
+$$
+\left|\varphi(x)-\varphi(y)\right|=\left|x-y\right| \eqno (*)
+$$
+Определим функцию $f:\mathbb{R}\to\mathbb{R}$:
+$$
+f(x)=\sum\limits_{n=1}^{\infty}f_n(x),\:f_n(x) = 4^{-n}\varphi(4^n x)
+$$
+Заметим, что $\forall x \in \mathbb{R}\;\left(\left|f_n(x)\right|\leqslant4^{-n}\right)$, следовательно ряд  $\sum\limits_{n=1}^{\infty}f_n$ сходится равномерно на $\mathbb{R}$ (по признаку Вейерштрасса). Все функции $f_n$ непрерывны и, значит, $f$ непрерывна на $\mathbb{R}$.
+
+Пусть $a \in \mathbb{R}$. Определим ненулевую последовательность $\left\{h_k\right\}$, $h_k \to 0$ и $\nexists \lim\limits_{k \to \infty}\frac{f(a+h_k)-f(a)}{h_k}$.
+
+Фиксируем $k \in \mathbb{N}$. Заметим, что
+\begin{gather*}
+\left(4^k a, 4^k a+\frac{1}{2}\right) \cap \mathbb{Z} \neq \varnothing \Rightarrow \left(4^k a-\frac{1}{2}, 4^k a\right) \cap \mathbb{Z} = \varnothing \\
+\left(4^k a-\frac{1}{2}, 4^k a\right) \cap \mathbb{Z} \neq \varnothing \Rightarrow \left(4^k a, 4^k a+\frac{1}{2}\right) \cap \mathbb{Z} = \varnothing 
+\end{gather*}
+Поэтому существует $h_k=\pm \frac{1}{2}4^{-k}$, что на интервале с концами $4^k a$ и $4^k (a+h_k)$ нет целых чисел. Более того, на интервале с концами $4^n a$ и $4^n \left(a+h_k\right)$ при $n \leqslant k$ также нет целых чисел. Поэтому в силу (*)
+$$
+\left|\varphi\left(4^n \left(a+h_k\right)\right)-\varphi\left(4^n a\right)\right| = 4^n \left|h_k\right|,\:n \leqslant k
+$$
+И в силу $2$-периодичности $\varphi$
+\begin{gather*}
+\left|\varphi(4^n \left(a + h_k\right))-\varphi\left(4^n a\right)\right|=0,\:n>k
+\end{gather*}
+Следовательно,
+$$
+|f_n(a+h_k)-f_n(a)|=
+\begin{cases}
+|h_k|, & n \leqslant k\\
+0, & n > k
+\end{cases}
+$$
+и, значит,
+$$
+\frac{f(a+h_k)-f(a)}{h_k}=\sum\limits_{n=1}^{k}\frac{f_n(a+h_k)-f_n(a)}{h_k}=\sum\limits_{n=1}^{k}\pm 1.\;\blacksquare
+$$
+
+\section*{Степенные ряды.}
+\textbf{Определение.} Степенным рядом называется функциональный ряд вида
+$$
+\sum\limits_{n=0}^{\infty}c_n (z-z_0)^n \eqno (1)
+$$
+где $x_n, z_0 \in \mathbb{C},\:z$ - комплексная переменная.
+
+\textbf{Определение.} Неотрицательное число $R$ (или символ $+\infty$) называется радиусом сходимости степенного ряда (1), если
+\begin{align*}
+\forall z \in \mathbb{C}\quad |z-z_0|&<R \Rightarrow \sum\limits_{n=1}^{\infty}c_n(z-z_0)^n\:\text{сходится} \\
+\forall z \in \mathbb{C}\quad |z-z_0|&>R \Rightarrow \sum\limits_{n=1}^{\infty}c_n(z-z_0)^n\:\text{расходится}
+\end{align*}
+
+\textbf{Теорема 1 (Коши-Адамар).} Всякий степенной ряд имеет радиус сходимости. Радиус сходимости ряда (1) выражается формулой
+$$
+R=\frac{1}{\varlimsup\limits_{n \to \infty}\sqrt[n]{|c_n|}} \quad \left(\frac{1}{+\infty}=0,\:\frac{1}{0}=+\infty\right) 
+$$
+$\blacktriangle$ Пусть $z \neq z_0$. Тогда
+$$
+q=\varlimsup\limit_{n \to \infty}\sqrt[n]{|c_n(z-z_0)^n|}=|z-z_0|\varlimsup\limit_{n \to \infty}\sqrt[n]{|c_n|}=\frac{|z-z_0|}{R}\quad \left(0,\; \text{если}\;R=+\infty;\:+\infty,\;\text{если}\;R=0\right)
+$$
+Поэтому если $|z-z_0|<R$, то $q<1$ и по признаку Коши для числовых рядов ряд (1) сходится абсолютно. Если $z-z_0>R$, то $q>1$ и по признаку Коши $n$-ый член не стремится к нулю. Значит, ряд (1) расходится и абсолютно расходится (т.е. расходится ряд из модулей членов). Следовательно, $R$ - радиус сходимости ряда (1).\:$\blacksquare$
+
+\textbf{Определение.} Пусть $R$ - радиус сходимости степенного ряда (1). Множество $B_R(z_0)=\left\{z \in \mathbb{C}: |z-z_0|<R\right\}$ называется кругом сходимости ряда (1).
+
+\textbf{Следствие.} Если величина $R \in [0, +\infty]$ удовлетворяет условиям
+\begin{align*}
+\forall z \in \mathbb{C}\quad |z-z_0|&<R \Rightarrow \sum\limits_{n=1}^{\infty}c_n(z-z_0)^n\:\text{абсолютно сходится} \\
+\forall z \in \mathbb{C}\quad |z-z_0|&>R \Rightarrow \sum\limits_{n=1}^{\infty}c_n(z-z_0)^n\:\text{абсолютно расходится,}
+\end{align*}
+то $R$ - радиус сходимости ряда (1).
+
+\textbf{Пример.} Найдем радиус сходимости ряда $\sum\limits_{n=1}^{\infty}\frac{n!}{n^n}z^{2n}$.
+
+$\blacktriangle$ Введем обозначение $u_n(z)=\frac{n!}{n^n}z^{2n}$. Пусть $x \neq 0$:
+$$
+\frac{|u_{n+1}(z)|}{|u_n(z)|}=\frac{(n+1)n^n}{(n+1)^{(n+1)}}|z|^2=\frac{|z|^2}{(1+\frac{1}{n})^{n}} \to \frac{|z|^2}{e}
+$$
+Если $|z|<\sqrt{e}$, то по признаку Даламбера ряд сходится абсолютно. Если $|z|>\sqrt{e}$, то по по признаку Даламбера ряд расходится абсолютно. Применяя следствие, получаем, что $R=\sqrt{e}$.\:$\blacksquare$
+
+\textbf{Теорема 2.} Пусть ряд (1) имеет радиус сходимости $R \in (0;\:+\infty]$. Тогда этот ряд сходится равномерно на любом замкнутом круге вида $\overline{B}_{r}(z_0)=\left\{z \in \mathbb{C}:|z-z_0|\leqslant r\right\},\:0 \leqslant r < R$.
+
+$\blacktriangle$ По теореме 1 в точке $z_*=z_0+r$ ряд (1) сходится абсолютно, т.е. сходится числовой ряд $\sum\limits_{n=0}^{\infty}|c_n|r^n$. Если $z \in \mathbb{C}, \;|z-z_0| \leqslant r$, то $|c_n(z-z_0)^n|\leqslant|c_n|r^n$ и, значит, ряд (1) сходится равномерно на замкнутом круге $\overline{B}_r(z_0)$ по признаку Вейерштрасса.\:$\blacksquare$
+\end{document}
